@@ -1,0 +1,22 @@
+{
+  "name": "vue-notepad",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 5050"
+  },
+  "dependencies": {
+    "@vueuse/components": "^8.4.2",
+    "@vueuse/core": "^8.4.2",
+    "pinia": "^2.0.14",
+    "primeflex": "^3.2.0",
+    "primeicons": "^5.0.0",
+    "primevue": "^3.12.6",
+    "vue": "^3.2.33"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.1",
+    "vite": "^2.9.5"
+  }
+}
