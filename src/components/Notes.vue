@@ -14,10 +14,16 @@ store.notes[props.id].text = value
 </script>
 
 <template>
-  <Card>
+  <Card class="card">
     <template #title>{{ props.title }}</template>
     <template #content>
       <Textarea v-model="value" :autoResize="true" rows="5" cols="30" />
     </template>
   </Card>
 </template>
+
+<style lang="css" scoped>
+.p-card {
+  background: var(--surface-c);
+}
+</style>
