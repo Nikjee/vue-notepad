@@ -11,13 +11,18 @@ const store = useNotesStore()
     <Draggable
       v-for="(note, index) in store.notes"
       :initialValue="{ x: note.x, y: note.y }"
-      class="fixed select-none cursor-pointer z-5"
-      :storage-key="'vueuse-draggable' + note.id"
-      storage-type="session"
+      class="fixed select-none cursor-pointer z-4"
+      :storage-key="'note ' + note.id"
+      storage-type="local"
       :key="note.id"
     >
       <Notes :title="note.title" :text="note.text" :id="index"> </Notes>
     </Draggable>
+    <Button
+      icon="pi pi-plus"
+      class="p-button-rounded z-5"
+      @click="store.addNote(1)"
+    />
   </div>
 </template>
 
