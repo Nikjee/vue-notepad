@@ -6,6 +6,7 @@ import PrimeVue from 'primevue/config'
 import Button from 'primevue/button'
 import Textarea from 'primevue/textarea'
 import Card from 'primevue/card'
+import InputText from 'primevue/inputtext'
 
 import 'primevue/resources/themes/bootstrap4-dark-blue/theme.css'
 import 'primevue/resources/primevue.min.css'
@@ -17,6 +18,7 @@ const app = createApp(App)
 app.use(PrimeVue)
 app.use(createPinia())
 app.component('Button', Button)
+app.component('InputText', InputText)
 app.component('Textarea', Textarea)
 app.component('Card', Card)
 
