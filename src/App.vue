@@ -16,7 +16,13 @@ const store = useNotesStore()
       storage-type="local"
       :key="note.id"
     >
-      <Notes :title="note.title" :text="note.text" :id="index"> </Notes>
+      <Notes
+        :title="note.title"
+        :text="note.text"
+        :id="index"
+        :noteId="note.id"
+      >
+      </Notes>
     </Draggable>
     <Button
       icon="pi pi-plus"

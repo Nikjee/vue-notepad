@@ -25,16 +25,17 @@ export const useNotesStore = defineStore('notes', {
   actions: {
     addNote() {
       let note = {
-        id: this.notes.length + 1,
-        title: 'Your title',
-        text: 'Your text',
+        id: this.notes.at(-1).id + 1,
+        title: 'Note',
+        text: '',
         x: 300,
         y: 300,
       }
       this.notes.push(note)
     },
-    removeNote(id) {
+    removeNote(id, noteId) {
       this.notes.splice(id, 1)
+      localStorage.removeItem('note ' + noteId)
     },
   },
 })

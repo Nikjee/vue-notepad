@@ -6,11 +6,12 @@ const props = defineProps({
   title: String,
   text: String,
   id: Number,
+  noteId: Number,
 })
 
 const store = useNotesStore()
-const value = ref(props.text) || ref('Enter text')
-const titleInput = ref(props.title)
+const value = ref(props.text) || ref('')
+const titleInput = ref(props.title) || ref('Note')
 const showEdit = ref(false)
 
 const editTitle = () => {
@@ -55,7 +56,7 @@ const editText = () => {
         <Button
           icon="pi pi-times"
           class="p-button-rounded p-button-secondary p-button-text p-button-sm card__button-close"
-          @click="store.removeNote(id)"
+          @click="store.removeNote(id, noteId)"
         />
       </div>
     </template>
