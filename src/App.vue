@@ -1,5 +1,4 @@
 <script setup>
-import { UseDraggable as Draggable } from '@vueuse/components'
 import Notes from '@/components/Notes.vue'
 import { useNotesStore } from '@/store/notes'
 
@@ -8,28 +7,30 @@ const store = useNotesStore()
 
 <template>
   <div class="flex align-items-center justify-content-center w-full h-screen">
-    <Draggable
-      v-for="(note, index) in store.notes"
-      :initialValue="{ x: note.x, y: note.y }"
-      class="fixed select-none cursor-pointer z-4"
-      :storage-key="'note ' + note.id"
-      storage-type="local"
-      :key="note.id"
-    >
-      <Notes
-        :title="note.title"
-        :text="note.text"
-        :id="index"
-        :noteId="note.id"
-      >
-      </Notes>
-    </Draggable>
     <Button
       icon="pi pi-plus"
       class="p-button-rounded z-5"
       @click="store.addNote(1)"
     />
+
+    <Button
+      icon="pi pi-circle"
+      class="p-button-rounded z-5"
+      @click="openModal"
+    />
   </div>
+
+  <Notes
+    v-for="(note, index) in store.notes"
+    class="fixed z-4"
+    :storage-key="'note ' + note.id"
+    :key="note.id"
+    :title="note.title"
+    :text="note.text"
+    :id="index"
+    :noteId="note.id"
+  >
+  </Notes>
 </template>
 
 <style>

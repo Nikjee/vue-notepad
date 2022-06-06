@@ -1,12 +1,32 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { useNotesStore } from '@/store/notes'
+import { useDraggable, useWindowSize, useStorage } from '@vueuse/core'
 
 const props = defineProps({
   title: String,
   text: String,
   id: Number,
   noteId: Number,
+  storageKey: String,
+})
+
+const dragger = ref(null)
+
+const { width, height } = useWindowSize()
+
+let pos = {
+  x: width.value - 350,
+  y: height.value - 350,
+}
+
+const { style } = useDraggable(dragger, {
+  initialValue: useStorage(props.storageKey, pos, localStorage),
+  preventDefault: true,
+})
+
+let _style = computed(() => {
+  return `${style.value}  z-index:20;`
 })
 
 const store = useNotesStore()
@@ -25,13 +45,12 @@ const editText = () => {
 </script>
 
 <template>
-  <Card class="card">
+  <Card class="card cursor-auto fixed" :style="_style">
     <template #title>
       <div class="card__title flex justify-content-between align-items-center">
-        <div
-          class="card__title-block transition-ease-in transition-duration-500"
-        >
+        <div class="card__title-block">
           <div
+            ref="dragger"
             v-if="!showEdit"
             class="card__title-text flex justify-content-center align-items-center"
           >
@@ -75,14 +94,12 @@ const editText = () => {
 <style lang="scss" scoped>
 .p-card {
   background: var(--gray-900);
-}
-
-.p-card:deep(.p-card-body) {
-  padding: 0.75rem;
-}
-
-.p-card:deep(.p-card-content) {
-  padding: 0.5rem 0;
+  &:deep(.p-card-body) {
+    padding: 0.75rem;
+  }
+  &:deep(.p-card-content) {
+    padding: 0.5rem 0;
+  }
 }
 .p-inputtext {
   background: var(--surface-e);
@@ -96,6 +113,7 @@ const editText = () => {
 
   &__title {
     &-text:hover {
+      cursor: grab;
       .card__title-button {
         visibility: visible;
       }
